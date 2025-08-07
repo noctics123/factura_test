@@ -1,8 +1,10 @@
 import streamlit as st
 from datetime import datetime
 
-def generate_receipt():
-    # CSS styling - using proper string formatting
+def main():
+    st.title("Generador de Recibos inDrive")
+    
+    # CSS styling
     st.markdown("""
     <style>
         .container {
@@ -46,8 +48,8 @@ def generate_receipt():
         .location p {
             margin: 2px 0 2px 20px;
         }
-        .location .bold {
-            margin-left: 0;
+        .bold {
+            font-weight: bold;
         }
         .table {
             width: 100%;
@@ -67,62 +69,43 @@ def generate_receipt():
             justify-content: space-between;
             margin-top: 15px;
         }
-        .bold {
-            font-weight: bold;
-        }
     </style>
     """, unsafe_allow_html=True)
 
-    # Receipt data - you could make these dynamic with Streamlit inputs
-    invoice_number = "PE2508052313221hzl"
-    current_date = datetime.now().strftime("%B %d, %Y")
-    customer_name = "Kenny Mendo"
-    ride_type = "Viaje urbano"
-    driver_name = "Jhonny Francisco Pumallocia Romero"
-    car_details = "black Toyota Rush BXM660"
-    pickup_location = "Jr. Centenario 159, Lima, Lima Province, Peru"
-    dropoff_location = "Av. Alfredo Mendiola 3697, Lima, Lima Province, Peru"
-    pickup_time = "6:23 PM, August 5, 2025"
-    dropoff_time = "8:11 PM, August 5, 2025"
-    distance = "21.2 km"
-    ride_fare = "S/ 78.00"
-    payment_method = "Transferencia"
-    total_amount = "S/ 78.00"
-
-    # Receipt HTML
-    receipt_html = f"""
+    # HTML del recibo
+    receipt_html = """
     <div class="container">
         <div class="header">
             <div class="logo">inDrive</div>
             <div class="title">Recibo por tu servicio</div>
-            <div class="subheader">Número de factura: {invoice_number} <span>Fecha: {current_date}</span></div>
+            <div class="subheader">Número de factura: PE2508052313221inzl <span>Fecha: August 07, 2025</span></div>
         </div>
 
         <div class="details">
-            <p class="bold">Para: {customer_name}</p>
+            <p class="bold">Para: Kenny Mendo</p>
             <dl>
-                <dt>Tipo de solicitud:</dt><dd>{ride_type}</dd>
-                <dt>Nombre del conductor:</dt><dd>{driver_name}</dd>
-                <dt>Detalles del auto:</dt><dd>{car_details}</dd>
-                <dt>Fecha del viaje:</dt><dd>{current_date}</dd>
+                <dt>Tipo de solicitud:</dt><dd>Viaje urbano</dd>
+                <dt>Nombre del conductor:</dt><dd>Jhonny Francisco Pumallocia Romero</dd>
+                <dt>Detalles del auto:</dt><dd>black Toyota Rush BXM660</dd>
+                <dt>Fecha del viaje:</dt><dd>August 07, 2025</dd>
             </dl>
         </div>
 
         <div class="location">
             <p class="bold">Recogida:</p>
-            <p>{pickup_location}</p>
-            <p>{pickup_time}</p>
+            <p>Jr. Centenario 159, Lima, Lima Province, Peru</p>
+            <p>6:23 PM, August 5, 2025</p>
         </div>
 
         <div class="location">
             <p class="bold">Dejada:</p>
-            <p>{dropoff_location}</p>
-            <p>{dropoff_time}</p>
+            <p>Av. Alfredo Mendiola 3697, Lima, Lima Province, Peru</p>
+            <p>8:11 PM, August 5, 2025</p>
         </div>
 
         <div class="location">
             <p class="bold">Distancia:</p>
-            <p>{distance}</p>
+            <p>21.2 km</p>
         </div>
 
         <table class="table">
@@ -132,21 +115,19 @@ def generate_receipt():
             </tr>
             <tr>
                 <td>Tarifa del viaje (incluye impuestos)</td>
-                <td>{ride_fare}</td>
+                <td>S/ 78.00</td>
             </tr>
         </table>
 
         <div class="payment">
-            <p class="bold">Método de pago: {payment_method}</p>
-            <p class="bold">Monto total: {total_amount}</p>
+            <p class="bold">Método de pago: Transferencia</p>
+            <p class="bold">Monto total: S/ 78.00</p>
         </div>
     </div>
     """
 
-    # Display the receipt
+    # Mostrar el HTML
     st.markdown(receipt_html, unsafe_allow_html=True)
 
-# Streamlit app layout
-st.set_page_config(page_title="Generador de Recibos", layout="centered")
-st.title("Generador de Recibos inDrive")
-generate_receipt()
+if __name__ == "__main__":
+    main()
